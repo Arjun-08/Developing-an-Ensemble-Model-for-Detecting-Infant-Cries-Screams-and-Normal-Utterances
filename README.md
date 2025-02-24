@@ -46,13 +46,9 @@ This helps in reducing errors and improving overall accuracy.
 ---
 ## Dataset
 The project utilizes multiple datasets:
-- **Infant Cry and Snoring Detection (ICSD) Dataset**
-- **Infant Cry Audio Corpus**
-- **Baby Cry Datasets (AudioSet)**
-- **Human Screaming Detection Dataset**
-- **Common Voice Dataset**
-- **LibriSpeech Dataset**
-- **Children's Speech Dataset (AudioSet)**
+-Infant Cry Audio Corpus from KAGGLE
+-Human Screaming Detection Dataset from KAGGLE
+-Children speech Audioset 4
 
 All datasets were preprocessed to ensure:
 - **Consistent sample rates**

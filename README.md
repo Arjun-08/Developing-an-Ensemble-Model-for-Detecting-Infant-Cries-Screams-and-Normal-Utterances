@@ -46,9 +46,9 @@ This helps in reducing errors and improving overall accuracy.
 ---
 ## Dataset
 The project utilizes multiple datasets:
--Infant Cry Audio Corpus from KAGGLE
--Human Screaming Detection Dataset from KAGGLE
--Children speech Audioset 4
+- **Infant Cry Audio Corpus from KAGGLE**
+- **Human Screaming Detection Dataset from KAGGLE**
+- **Children speech Audioset 4**
 
 All datasets were preprocessed to ensure:
 - **Consistent sample rates**

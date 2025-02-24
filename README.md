@@ -1,116 +1,171 @@
-Developing an Ensemble Model for Detecting
-Infant Cries, Screams, and Normal Utterances
-February 24, 2025
-1 Introduction
-The goal of this project is to develop a robust audio classification system capa-
-ble of distinguishing between infant cries, screams, and normal utterances. This
-involves training individual models using YAMNet and Wav2Vec2 architectures,
-creating an ensemble of these models, and deploying the solution within a Tem-
-poral workflow.
-2 Data Acquisition and Preprocessing
-2.1 Dataset Selection
-We utilized multiple datasets, including:
-• Infant Cry Audio Corpus from KAGGLE
-• Human Screaming Detection Dataset from KAGGLE
-• Children speech Audioset 4
-These files have been uploaded to Google Drive and mounted to access
-the large dataset efficiently.
-2.2 Data Preparation
-The audio files were preprocessed to ensure consistency in format, including
-sampling rate and bit depth normalization. The data was segmented and labeled
-into three categories: ‘crying’, ‘screaming’, and ‘normal utterances’.
-3 Model Training
-3.1 YAMNet Model
-The YAMNet model was fine-tuned for the classification task. Necessary mod-
-ifications were made to adapt YAMNet for this specific application.
-1
-3.2 Wav2Vec2 Model
-Similarly, the Wav2Vec2 model was fine-tuned to classify the audio segments
-effectively.
-4 Ensemble Model Development
-We combined predictions from YAMNet and Wav2Vec2 using ensemble tech-
-niques such as averaging probabilities and majority voting.
-5 Training, Testing, and Validation Approach
-5.1 Training Approach
-To ensure robust model performance and prevent overfitting, we adopted a
-structured approach:
-• Dataset Split: The data was split into 70% training, 15% validation, and
-15% testing. This ensures that the models are trained on a substantial
-portion of the data while keeping sufficient data for validation and final
-testing.
-• Validation: The validation set was used to tune hyperparameters and
-assess model generalization before final evaluation.
-• Testing: The test set, containing unseen data, was used to evaluate real-
-world performance.
-• Data Augmentation: Various augmentation techniques, such as noise ad-
-dition and pitch shifting, were applied to increase model robustness.
-• Cross-Validation: Employed to ensure the model generalizes well to dif-
-ferent subsets of the dataset.
-5.2 Testing and Validation
-Model performance was evaluated using accuracy, precision, recall, and F1-score.
-6 Loss Function Justification
-We selected the sparse categorical cross-entropy loss function due to its suit-
-ability for multi-class classification problems. Given that our dataset consists of
-three distinct classes (‘crying’, ‘screaming’, and ‘normal utterances’), this loss
-function is effective in handling categorical labels.
-The choice of sparse categorical cross-entropy is justified as follows:
-2
-• Handles Multi-Class Classification Efficiently: Since we have more than
-two classes, binary cross-entropy would not be appropriate. Sparse cate-
-gorical cross-entropy is specifically designed for multi-class problems.
-• Computationally Efficient: This loss function is optimized for handling
-integer labels without requiring one-hot encoding, reducing computational
-overhead.
-• Balances Experimental and Control Groups: Our dataset contains varied
-samples from different sources. Sparse categorical cross-entropy ensures
-that all class labels contribute to the training process appropriately, pre-
-venting class imbalance from skewing the results.
-• Alignment with Model Architectures: Both YAMNet and Wav2Vec2 out-
-put probability distributions over multiple categories, making categorical
-cross-entropy a natural fit.
-7 Performance Metrics
-We evaluated the models using:
-• Confusion Matrices
-• ROC Curves
-• Classification Reports
-8 Results and Discussion
-8.1 YAMNet Model Results
+# Infant Audio Classification: Cry, Scream, and Normal Utterances
+
+## Project Overview
+This project aims to develop a robust ensemble-based audio classification system that distinguishes between infant cries, screams, and normal utterances. The approach integrates two powerful models, **YAMNet** and **Wav2Vec2**, to leverage both pre-trained knowledge and fine-tuned accuracy for this specific classification task.
+
+The system processes raw audio input, extracts relevant features, and classifies the sounds into three categories:
+- **Crying**
+- **Screaming**
+- **Normal Utterances**
+
+An ensemble technique is used to combine the predictions from YAMNet and Wav2Vec2, ensuring improved accuracy and robustness.
+
+---
+## Features
+- Multi-dataset integration for diverse and balanced training.
+- Preprocessing techniques including noise reduction and pitch normalization.
+- Fine-tuned **YAMNet** and **Wav2Vec2** models.
+- **Ensemble learning** to improve classification accuracy.
+- **Google Colab integration** for ease of execution.
+- Performance evaluation through accuracy, precision, recall, and confusion matrices.
+
+---
+## Theory and Model Explanation
+
+### **1. YAMNet**
+YAMNet is a deep neural network trained on **AudioSet** to recognize over 500 different sound classes. It uses **Mel spectrograms** as input features and applies a **MobileNet** architecture.
+
+**Modifications in this project:**
+- Fine-tuned the model on our specific dataset.
+- Adjusted output layers to classify three specific categories.
+
+### **2. Wav2Vec2**
+Wav2Vec2 is a self-supervised **speech representation learning** model by Facebook AI. Unlike YAMNet, it learns **contextualized representations** directly from raw audio signals, making it robust to noise and variations.
+
+**Modifications in this project:**
+- Fine-tuned on labeled infant audio data.
+- Adjusted classification head for cry, scream, and normal utterance detection.
+
+### **3. Ensemble Model**
+We implemented an ensemble approach by combining outputs from both models using:
+- **Averaging Probabilities**: Taking the mean of both models' predictions.
+- **Majority Voting**: Selecting the most frequent predicted class.
+
+This helps in reducing errors and improving overall accuracy.
+
+---
+## Dataset
+The project utilizes multiple datasets:
+- **Infant Cry and Snoring Detection (ICSD) Dataset**
+- **Infant Cry Audio Corpus**
+- **Baby Cry Datasets (AudioSet)**
+- **Human Screaming Detection Dataset**
+- **Common Voice Dataset**
+- **LibriSpeech Dataset**
+- **Children's Speech Dataset (AudioSet)**
+
+All datasets were preprocessed to ensure:
+- **Consistent sample rates**
+- **Uniform bit-depth normalization**
+- **Proper segmentation and labeling**
+
+---
+## Setup Instructions
+### **1. Google Colab Setup**
+This project is implemented in **Google Colab** for ease of execution.
+
+**Steps to Run on Colab:**
+1. Open Google Colab: [Colab Link](https://colab.research.google.com/)
+2. Upload the dataset to **Google Drive**.
+3. Mount Google Drive in Colab:
+    ```python
+    from google.colab import drive
+    drive.mount('/content/drive')
+    ```
+4. Clone the GitHub repository:
+    ```bash
+    !git clone https://github.com/your-repo/infant-audio-classification.git
+    cd infant-audio-classification
+    ```
+5. Install required dependencies:
+    ```python
+    !pip install -r requirements.txt
+    ```
+6. Run the training and inference scripts (detailed below).
+
+---
+## Training, Testing, and Validation
+
+### **Dataset Split:**
+- **70% Training**
+- **15% Validation**
+- **15% Testing**
+
+### **Evaluation Metrics:**
+- **Accuracy**
+- **Precision, Recall, F1-score**
+- **Confusion Matrices**
+- **ROC Curves**
+
+---
+## Inference Instructions
+Once the model is trained, you can perform inference on new audio files.
+
+### **Run Inference on a Test Audio File:**
+```python
+from model import run_inference
+prediction = run_inference('test_audio.wav')
+print("Predicted Label:", prediction)
+```
+
+### **Example Prediction Output:**
+```bash
+Predicted Label: Crying
+```
+
+---
+## Results
+### **YAMNet Model Performance:**
+```
 Epoch 1/10
 accuracy: 0.6756 - loss: 0.9839 - val_accuracy: 0.7826 - val_loss: 0.9807
-Epoch 2/10
-accuracy: 0.8676 - loss: 0.6383 - val_accuracy: 0.7826 - val_loss: 0.8022
 ...
 Epoch 10/10
 accuracy: 0.8676 - loss: 0.4984 - val_accuracy: 0.7826 - val_loss: 0.7915
-3
-Figure 1: ROC Curve
-Figure 2: Confusion matrix
-4
-8.2 Wav2Vec2 Model Results
-Epoch 1 Validation Loss: 0.815121
-Epoch 2 Validation Loss: 0.833583
-Epoch 3 Validation Loss: 0.837320
-Figure 3: ROC Curve
-5
-Figure 4: Confusion matrix
-8.3 Ensemble model
-Train Loss: 0.6878751118977865 Test Accuracy: 0.7681 Test Precision: 0.5900
-Test Recall: 0.7681 Test F1 Score: 0.6674
-6
-Figure 5: ROC Curve
-Figure 6: Confusion matrix
-7
-8.4 Example Prediction
-Audio File: /content/drive/MyDrive/frontera/extracted_data/Screaming/---1_cCGK4M_out.wav
-Predicted Class: [3]
-The ensemble model demonstrated improved accuracy over individual models.
-9 Deployment with Temporal
-A Temporal workflow was designed to handle real-time audio classification with
-processing tasks for:
-• Preprocessing audio input
-• Running ensemble classification
-• Storing and managing results
-10 Conclusion
-This project successfully developed an ensemble model that effectively classi-
-fies infant cries, screams, and normal utterances. Future work can focus on
-improving real-time inference efficiency and expanding dataset diversity.
+```
+
+### **Wav2Vec2 Model Performance:**
+```
+Epoch 1   Validation Loss: 0.815121
+Epoch 2   Validation Loss: 0.833583
+Epoch 3   Validation Loss: 0.837320
+```
+
+### **Ensemble Model Performance:**
+```
+Train Loss: 0.6878751118977865
+Test Accuracy: 0.7681
+Test Precision: 0.5900
+Test Recall: 0.7681
+Test F1 Score: 0.6674
+```
+
+### **Visual Results:**
+ROC Curves, Confusion Matrices, and detailed evaluation are available in the LaTeX report.
+
+---
+## Contribution Guidelines
+Feel free to contribute to this project:
+1. Fork the repository.
+2. Create a new branch for your feature.
+3. Commit and push your changes.
+4. Open a pull request.
+
+---
+## References
+- [YAMNet Model](https://tfhub.dev/google/yamnet/1)
+- [Wav2Vec2 Paper](https://arxiv.org/abs/2006.11477)
+- [AudioSet Dataset](https://research.google.com/audioset/)
+
+---
+## License
+This project is open-source under the MIT License.
+
+---
+## Contact
+For questions or collaborations, reach out via [email@example.com](mailto:email@example.com).
+
+---
+### **Acknowledgments**
+Special thanks to the contributors and dataset providers that made this research possible!
+

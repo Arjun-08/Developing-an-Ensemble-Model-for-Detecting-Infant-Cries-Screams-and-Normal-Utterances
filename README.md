@@ -106,7 +106,7 @@ print("Predicted Label:", prediction)
 
 ### **Example Prediction Output:**
 ```bash
-Predicted Label: Crying
+Predicted Label: [3] (crying)
 ```
 
 ---

@@ -2,9 +2,11 @@ Developing an Ensemble Model for Detecting
 Infant Cries, Screams, and Normal Utterances
 February 24, 2025
 1 Introduction
-The goal of this project is to develop a robust audio classification system capable of distinguishing between infant cries, screams, and normal utterances. This
+The goal of this project is to develop a robust audio classification system capa-
+ble of distinguishing between infant cries, screams, and normal utterances. This
 involves training individual models using YAMNet and Wav2Vec2 architectures,
-creating an ensemble of these models, and deploying the solution within a Temporal workflow.
+creating an ensemble of these models, and deploying the solution within a Tem-
+poral workflow.
 2 Data Acquisition and Preprocessing
 2.1 Dataset Selection
 We utilized multiple datasets, including:
@@ -19,13 +21,15 @@ sampling rate and bit depth normalization. The data was segmented and labeled
 into three categories: ‘crying’, ‘screaming’, and ‘normal utterances’.
 3 Model Training
 3.1 YAMNet Model
-The YAMNet model was fine-tuned for the classification task. Necessary modifications were made to adapt YAMNet for this specific application.
+The YAMNet model was fine-tuned for the classification task. Necessary mod-
+ifications were made to adapt YAMNet for this specific application.
 1
 3.2 Wav2Vec2 Model
 Similarly, the Wav2Vec2 model was fine-tuned to classify the audio segments
 effectively.
 4 Ensemble Model Development
-We combined predictions from YAMNet and Wav2Vec2 using ensemble techniques such as averaging probabilities and majority voting.
+We combined predictions from YAMNet and Wav2Vec2 using ensemble tech-
+niques such as averaging probabilities and majority voting.
 5 Training, Testing, and Validation Approach
 5.1 Training Approach
 To ensure robust model performance and prevent overfitting, we adopted a
@@ -36,26 +40,33 @@ portion of the data while keeping sufficient data for validation and final
 testing.
 • Validation: The validation set was used to tune hyperparameters and
 assess model generalization before final evaluation.
-• Testing: The test set, containing unseen data, was used to evaluate realworld performance.
-• Data Augmentation: Various augmentation techniques, such as noise addition and pitch shifting, were applied to increase model robustness.
-• Cross-Validation: Employed to ensure the model generalizes well to different subsets of the dataset.
+• Testing: The test set, containing unseen data, was used to evaluate real-
+world performance.
+• Data Augmentation: Various augmentation techniques, such as noise ad-
+dition and pitch shifting, were applied to increase model robustness.
+• Cross-Validation: Employed to ensure the model generalizes well to dif-
+ferent subsets of the dataset.
 5.2 Testing and Validation
 Model performance was evaluated using accuracy, precision, recall, and F1-score.
 6 Loss Function Justification
-We selected the sparse categorical cross-entropy loss function due to its suitability for multi-class classification problems. Given that our dataset consists of
+We selected the sparse categorical cross-entropy loss function due to its suit-
+ability for multi-class classification problems. Given that our dataset consists of
 three distinct classes (‘crying’, ‘screaming’, and ‘normal utterances’), this loss
 function is effective in handling categorical labels.
 The choice of sparse categorical cross-entropy is justified as follows:
 2
 • Handles Multi-Class Classification Efficiently: Since we have more than
-two classes, binary cross-entropy would not be appropriate. Sparse categorical cross-entropy is specifically designed for multi-class problems.
+two classes, binary cross-entropy would not be appropriate. Sparse cate-
+gorical cross-entropy is specifically designed for multi-class problems.
 • Computationally Efficient: This loss function is optimized for handling
 integer labels without requiring one-hot encoding, reducing computational
 overhead.
 • Balances Experimental and Control Groups: Our dataset contains varied
 samples from different sources. Sparse categorical cross-entropy ensures
-that all class labels contribute to the training process appropriately, preventing class imbalance from skewing the results.
-• Alignment with Model Architectures: Both YAMNet and Wav2Vec2 output probability distributions over multiple categories, making categorical
+that all class labels contribute to the training process appropriately, pre-
+venting class imbalance from skewing the results.
+• Alignment with Model Architectures: Both YAMNet and Wav2Vec2 out-
+put probability distributions over multiple categories, making categorical
 cross-entropy a natural fit.
 7 Performance Metrics
 We evaluated the models using:
@@ -100,6 +111,6 @@ processing tasks for:
 • Running ensemble classification
 • Storing and managing results
 10 Conclusion
-This project successfully developed an ensemble model that effectively classifies infant cries, screams, and normal utterances. Future work can focus on
+This project successfully developed an ensemble model that effectively classi-
+fies infant cries, screams, and normal utterances. Future work can focus on
 improving real-time inference efficiency and expanding dataset diversity.
-8

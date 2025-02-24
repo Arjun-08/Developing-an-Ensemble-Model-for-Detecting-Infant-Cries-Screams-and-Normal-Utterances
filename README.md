@@ -100,7 +100,7 @@ Once the model is trained, you can perform inference on new audio files.
 ### **Run Inference on a Test Audio File:**
 ```python
 from model import run_inference
-prediction = run_inference('test_audio.wav')
+prediction = run_inference('/content/drive/MyDrive/frontera/extracted_data/Screaming/---1_cCGK4M_out.wav')
 print("Predicted Label:", prediction)
 ```
 
@@ -136,32 +136,18 @@ Test Recall: 0.7681
 Test F1 Score: 0.6674
 ```
 
-### **Visual Results:**
-ROC Curves, Confusion Matrices, and detailed evaluation are available in the LaTeX report.
-
----
-## Contribution Guidelines
-Feel free to contribute to this project:
-1. Fork the repository.
-2. Create a new branch for your feature.
-3. Commit and push your changes.
-4. Open a pull request.
-
 ---
 ## References
 - [YAMNet Model](https://tfhub.dev/google/yamnet/1)
 - [Wav2Vec2 Paper](https://arxiv.org/abs/2006.11477)
 - [AudioSet Dataset](https://research.google.com/audioset/)
 
----
-## License
-This project is open-source under the MIT License.
 
 ---
 ## Contact
-For questions or collaborations, reach out via [email@example.com](mailto:email@example.com).
+For questions or collaborations, reach out via [nvarjunmani07@gmail.com](mailto:nvarjunmani07@gmail.com).
 
 ---
 ### **Acknowledgments**
-Special thanks to the contributors and dataset providers that made this research possible!
+Special thanks to the Team FRONTERA HEALTH and dataset providers that made this research possible!
 

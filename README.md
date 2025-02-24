@@ -70,9 +70,13 @@ This project is implemented in **Google Colab** for ease of execution.
     ```
 4. Clone the GitHub repository:
     ```bash
-    !git clone https://github.com/your-repo/infant-audio-classification.git
-    cd infant-audio-classification
+    !git clone https://github.com/Arjun-08/Developing-an-Ensemble-Model-for-Detecting-Infant-Cries-Screams-and-Normal-Utterances.git
+    cd Developing-an-Ensemble-Model-for-Detecting-Infant-Cries-Screams-and-Normal-Utterances
     ```
+
+    
+
+
 5. Install required dependencies:
     ```python
     !pip install -r requirements.txt

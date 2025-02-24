@@ -1,0 +1,11 @@
+tensorflow
+tensorflow_hub
+librosa
+torch
+torchaudio
+transformers
+datasets
+scikit-learn
+matplotlib
+seaborn
+temporalio
